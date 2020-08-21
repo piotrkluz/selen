@@ -1,12 +1,7 @@
 <configuration>
-    <logger name="com.mycompany.project" level="${log.level}"/>
+    <logger name="selen" level="${log.level}"/>
     <logger name="httpclient" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
-    <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.hibernate.cfg.AnnotationBinder" level="WARN"/>
-    <logger name="org.hibernate.cfg.annotations" level="WARN"/>
-    <logger name="org.quartz" level="WARN"/>
-    <logger name="org.springframework" level="WARN"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
