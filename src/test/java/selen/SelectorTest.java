@@ -105,24 +105,33 @@ public class SelectorTest {
     }
 
     @Test
-    @Disabled("Not implemented yet")
-    public void childSelectorFromElementScope() {
-//        $("abc").find().parent();
+    public void parentXpath() {
+        assertEquals("form", $("select").$("..").tagName());
+        assertEquals("form", $("select").$parent().tagName());
+    }
+
+    @Test
+//    @Disabled("Not implemented yet")
+    public void selectorFromElementScope() {
+//        $("abc").find().$parent();
 //        $("abc").find().$("other");
     }
 
     @Test
     @Disabled("Not implemented yet")
     public void textSelector() {
-//        $("abc").contains();
-//        $("abc").withText();
+//        $("select")
+//        $("abc").$contains(String text, boolean matchCase = false);
+//        $("abc").$withText(String text);
+//        $("abc").$startsWith(String text);
+//        $("abc").$endsWith(String text);
     }
 
-    private void shouldFind(SSelector selector, String text) {
+    private void shouldFind(SMatcher selector, String text) {
         assertEquals(text, selector.value());
     }
 
-    private void shouldNotFind(SSelector selector) {
+    private void shouldNotFind(SMatcher selector) {
         assertNull(selector.tryFind());
     }
 }

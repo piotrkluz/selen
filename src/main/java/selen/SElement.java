@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface SElement {
     WebElement getWebElement();
+
     WebDriver getDriver();
 
     default String text() {
@@ -20,22 +21,31 @@ public interface SElement {
     default String value() {
         return attribute("value");
     }
-    default boolean isExist() { return getWebElement() != null; }
+
+    default boolean isExist() {
+        return getWebElement() != null;
+    }
+
     default boolean isDisplayed() {
         return getWebElement().isDisplayed();
     }
+
     default boolean isSelected() {
         return getWebElement().isSelected();
     }
+
     default boolean isEnabled() {
         return getWebElement().isEnabled();
     }
-    default void submit() {
+
+    default SElement submit() {
         getWebElement().submit();
+        return this;
     }
 
-    default void sendKeys(CharSequence... charSequence) {
+    default SElement sendKeys(CharSequence... charSequence) {
         getWebElement().sendKeys(charSequence);
+        return this;
     }
 
     default String tagName() {
@@ -152,7 +162,8 @@ public interface SElement {
      * Executes JavaScript inside browser.
      * Current element have "el" name in JS Scope:
      *
-     * @example - myElement.executeJs("console.log(el.outerHTML)")
+     * @examples:
+     * - myElement.executeJs("console.log(el.outerHTML)")
      * - myElement.executeJs("console.log(arguments[0])", argumentComesFromJava)
      */
     default Object executeJs(String jsCode, Object... arguments) {
@@ -161,5 +172,9 @@ public interface SElement {
         Object[] allArgs = ArrayUtils.add(arguments, getWebElement());
         int lastArg = allArgs.length - 1;
         return executor.executeScript("let el = arguments[" + lastArg + "];\n" + jsCode, allArgs);
+    }
+
+    default boolean equals(SElement compareElement) {
+        return getWebElement().equals(compareElement.getWebElement());
     }
 }

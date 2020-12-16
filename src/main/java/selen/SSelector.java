@@ -1,31 +1,27 @@
 package selen;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public interface SSelector extends SElement {
-    SSelector $(String cssOrXpath);
-    SElement find();
-    ElementList<SElement> findAll();
+public interface SSelector {
+    WebElement find(WebDriver driver);
 
-    default WebElement getWebElement() {
-        return find().getWebElement();
-    }
-    default boolean isExist() {
-        return tryFind() != null;
-    }
-    default SElement tryFind() {
-        try {
-            return find();
-        } catch (Exception e) {
+    class SXpath implements SSelector {
+        @Override
+        public WebElement find(WebDriver driver) {
             return null;
         }
     }
-
-    default SElement find(int index) {
-        return findAll().get(index);
+    class SCss implements SSelector {
+        @Override
+        public WebElement find(WebDriver driver) {
+            return null;
+        }
     }
-
-    default int count() {
-        return findAll().size();
+    class SJs implements SSelector {
+        @Override
+        public WebElement find(WebDriver driver) {
+            return null;
+        }
     }
 }

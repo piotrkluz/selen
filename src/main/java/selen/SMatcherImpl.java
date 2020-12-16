@@ -8,20 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SSelectorImpl implements SSelector {
+public class SMatcherImpl implements SMatcher {
     private final ByChain chain;
 
-    SSelectorImpl(String cssOrXpath) {
+    SMatcherImpl(String cssOrXpath) {
         chain = new ByChain(cssOrXpath);
     }
 
-    private SSelectorImpl(ByChain chain) {
+    private SMatcherImpl(ByChain chain) {
         this.chain = chain;
     }
 
     @Override
-    public SSelector $(String cssOrXpath) {
-        return new SSelectorImpl(this.chain.add(cssOrXpath));
+    public SMatcher $(String cssOrXpath) {
+        return new SMatcherImpl(this.chain.add(cssOrXpath));
+    }
+    public SMatcher $(By by) {
+        return new SMatcherImpl(this.chain.add(by));
     }
 
     @Override
@@ -47,7 +50,7 @@ public class SSelectorImpl implements SSelector {
     }
 
     @Override
-    public ElementList<SElement> findAll() {
+    public PowerList<SElement> findAll() {
         List<By> byList = chain.getAll();
         WebDriver driver = getDriver();
 
@@ -60,7 +63,7 @@ public class SSelectorImpl implements SSelector {
 
         return list.stream()
                 .map(el -> new SElementImpl(el, driver))
-                .collect(Collectors.toCollection(ElementList::new));
+                .collect(Collectors.toCollection(PowerList::new));
     }
 
     private WebElement findOne(By by, WebElement parent) {

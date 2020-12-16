@@ -16,6 +16,12 @@ public class ByChain {
         this.list = list;
     }
 
+    public ByChain add(By by) {
+        List<By> newList = new ArrayList<>(this.list);
+        newList.add(by);
+        return new ByChain(newList);
+    }
+
     public ByChain add(String cssOrXpath) {
         List<By> newList = new ArrayList<>(this.list);
 
@@ -56,7 +62,7 @@ public class ByChain {
     }
 
     private boolean isXpath(String cssOrXpath) {
-        return cssOrXpath.startsWith("//") || cssOrXpath.startsWith(".//");
+        return cssOrXpath.startsWith("//") || cssOrXpath.startsWith("./") || cssOrXpath.startsWith("..");
     }
 
     private By mergeBys(By first, By second) {

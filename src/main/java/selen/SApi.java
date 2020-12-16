@@ -1,7 +1,7 @@
 package selen;
 
 public class SApi {
-    public static SSelector $(String cssOrXpath) {
-        return new SSelectorImpl(cssOrXpath);
+    public static SMatcher $(String cssOrXpath) {
+        return new SMatcherImpl(cssOrXpath);
     }
 }

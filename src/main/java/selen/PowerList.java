@@ -6,20 +6,20 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ElementList<T> extends ArrayList<T> {
-    public <R> ElementList<R> map(Function<? super T, ? extends R> mapper) {
+public class PowerList<T> extends ArrayList<T> {
+    public <R> PowerList<R> map(Function<? super T, ? extends R> mapper) {
         return this.stream().map(mapper)
-                .collect(Collectors.toCollection(ElementList::new));
+                .collect(Collectors.toCollection(PowerList::new));
     }
 
-    public ElementList<T> each(Consumer<? super T> action) {
+    public PowerList<T> each(Consumer<? super T> action) {
         this.forEach(action);
         return this;
     }
 
-    public ElementList<T> filter(Predicate<? super T> predicate) {
+    public PowerList<T> filter(Predicate<? super T> predicate) {
         return this.stream().filter(predicate)
-                .collect(Collectors.toCollection(ElementList::new));
+                .collect(Collectors.toCollection(PowerList::new));
     }
 
     public boolean anyMatch(Predicate<? super T> predicate) {

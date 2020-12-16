@@ -2,8 +2,10 @@ package selen;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import selen.util.BrowserContent;
@@ -132,6 +134,7 @@ public class ElementTest {
     }
 
     @Test
+    @Disabled("Need to investigate")
     public void dragAndDrop() {
         throw new RuntimeException();
         //given
@@ -165,5 +168,15 @@ public class ElementTest {
         input.sendKeys("123{backspace}{backspace}");
 
         assertEquals("123{backspace}{backspace}", input.value());
+    }
+
+    @Test
+    public void equalsTest() {
+        content.setBody("<form></form>");
+        WebDriver driver = $("form").getDriver();
+        SElement el1 = $("form").find();// driver.findElement(By.cssSelector("form"));
+        SElement el2 = $("form").find();// driver.findElement(By.cssSelector("form"));
+
+        assertTrue(el1.equals(el2));
     }
 }
