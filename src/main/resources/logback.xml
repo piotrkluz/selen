@@ -1,0 +1,16 @@
+<configuration>
+    <logger name="selen" level="${log.level}"/>
+    <logger name="httpclient" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-16thread] %-5level %-35.35logger{30} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Log level comes from log.level env variable. Default set to INFO -->
+    <root level="${log.level:-INFO}">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
