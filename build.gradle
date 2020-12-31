@@ -1,6 +1,22 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'maven-publish'
     id "io.freefair.lombok" version "5.1.0"
+}
+
+group = 'selen'
+version = '0.1.0'
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+//        maven { url = uri("${buildDir}/publishing-repository") }
+    }
 }
 
 repositories {
