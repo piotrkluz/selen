@@ -1,0 +1,42 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id "io.freefair.lombok" version "5.1.0"
+}
+
+group = 'selen'
+version = '0.1.0'
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+//        maven { url = uri("${buildDir}/publishing-repository") }
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // This dependency is used by the application.
+    implementation 'io.github.bonigarcia:webdrivermanager:4.1.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
+    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.0'
+    testImplementation 'org.takes:takes:1.11.3'
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+}
