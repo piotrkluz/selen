@@ -1,11 +1,20 @@
 # TODO
-##Features
-- $().findAll()
+1 config class
+2 gradle publish
+3 example usage
+
+
+
+
+## Features
+- DONE $().findAll()
     - map()
     - each()
     - filter()
     - anyMatch()
     - allMatch()
+
+
 - Custom exceptions with proper messages
     - Keyboard exceptions
     - Find element exceptions
@@ -18,9 +27,13 @@
     
 - Catch events
     - measure performance
+    - time tracing
     
-- Add Wait policy
+- Add Global configuration
+    - select browser name
+    - custom WebDriver provider
+    - merge selectors tweaks policy
 
 - Browser managment
     - auto close browser after tests
-    - let to reuse browser between test runs
+    - let reuse browser between test runs
