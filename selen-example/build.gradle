@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+//    id 'maven-publish'
+//    id "io.freefair.lombok" version "5.1.0"
+}
+
+group = 'selen-example'
+version = '0.1.0'
+
+repositories {
+//    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    implementation project(':selen-lib')
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+}
+
+test {
+    // JUNIT 5
+    useJUnitPlatform()
+}
