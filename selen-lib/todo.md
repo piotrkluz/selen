@@ -15,6 +15,8 @@
     - allMatch()
 
 
+
+- Module classes
 - Custom exceptions with proper messages
     - Keyboard exceptions
     - Find element exceptions
@@ -36,4 +38,4 @@
 
 - Browser managment
     - auto close browser after tests
-    - let reuse browser between test runs
+    - let reuse browser between test runs development.reuseBrowserBetweenTests
