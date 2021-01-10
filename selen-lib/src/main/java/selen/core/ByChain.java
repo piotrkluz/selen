@@ -1,6 +1,7 @@
 package selen.core;
 
 import org.openqa.selenium.By;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,18 +26,11 @@ public class ByChain {
     public ByChain add(String cssOrXpath) {
         List<By> newList = new ArrayList<>(this.list);
 
-        boolean doNormalize = true; // todo extract to configuration
         By by = byGen(cssOrXpath, true);
-        By last = getLast();
-        if (doNormalize
-                && (by instanceof By.ByCssSelector || by instanceof By.ByXPath)
-                && by.getClass().equals(last.getClass())) {
-            newList.set(newList.size() - 1, mergeBys(last, by));
-            return new ByChain(newList);
-        } else {
-            newList.add(by);
-            return new ByChain(newList);
-        }
+
+        newList.add(by);
+        return new ByChain(newList);
+
     }
 
     public List<By> getAll() {
@@ -63,20 +57,5 @@ public class ByChain {
 
     private boolean isXpath(String cssOrXpath) {
         return cssOrXpath.startsWith("//") || cssOrXpath.startsWith("./") || cssOrXpath.startsWith("..");
-    }
-
-    private By mergeBys(By first, By second) {
-        if(first instanceof By.ByXPath) {
-            return By.xpath(regenerateBy(first) + "//" + normalizeXpath(regenerateBy(second), false));
-        }
-        return By.cssSelector(regenerateBy(first) + " " + regenerateBy(second));
-    }
-
-    private String regenerateBy(By by) {
-        return by.toString().replaceFirst("^By\\.\\w+: ", "");
-    }
-
-    private By getLast() {
-        return list.get(list.size() - 1);
     }
 }
