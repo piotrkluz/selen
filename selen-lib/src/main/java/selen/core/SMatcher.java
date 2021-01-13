@@ -1,40 +1,79 @@
 package selen.core;
 
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import selen.exception.SelenCriticalError;
 import selen.utils.PowerList;
 
-public interface SMatcher extends SElement {
-    SMatcher $(String cssOrXpath);
-    SMatcher $(By by);
+@AllArgsConstructor
+public class SMatcher implements SElement, IMatcher {
+    private final ByChain chain;
+    private WebElement webElement;
 
-    SElement find();
-    PowerList<SElement> findAll();
+    public SMatcher(String cssOrXpath) {
+        chain = new ByChain(cssOrXpath);
+    }
+    private SMatcher(ByChain chain) {
+        this.chain = chain;
+    }
 
-    default SMatcher $parent() { return $(".." ); }
-//    default SSelector $contains() { return $(".." ); }
-//    default SSelector $withText() { return $(".." ); }
-//    default SSelector $startsWith() { return $(".." ); }
-//    default SSelector $endsWith() { return $(".." ); }
-    default WebElement getWebElement() {
-        return find().getWebElement();
+    @Override
+    public WebElement getWebElement() {
+        return webElement != null
+                ? webElement
+                : find().getWebElement();
     }
-    default boolean isExist() {
-        return tryFind() != null;
+
+    public SMatcher $(By by) {
+        return new SMatcher(this.chain.add(by));
     }
-    default SElement tryFind() {
+
+    public SMatcher $(String cssOrXpath) {
+        return new SMatcher(this.chain.add(cssOrXpath));
+    }
+
+    public SMatcher $parent() {
+        return $("..");
+    }
+
+    public <T extends SModule> T as(Class<T> clazz) {
+        try {
+            return clazz.getConstructor(SMatcher.class).newInstance(this);
+        } catch (Exception ex) {
+            String name = clazz.getSimpleName();
+            String msg = String.format("Module class: %s should have constructor: %s(SMatcher matcher){super(matcher)}", name, name);
+            throw new SelenCriticalError(msg, ex);
+        }
+    }
+
+    public SMatcher find() {
+        webElement = new FindExecutor(chain).find();
+        return this;
+    }
+
+    public SMatcher find(int nth) {
+        return findAll().get(nth);
+    }
+
+    public <T extends SMatcher> PowerList<T> findAll() {
+        return new FindExecutor(chain)
+                .findAll()
+                .stream()
+                .map(el -> (T)new SMatcher(chain, el))
+                .collect(PowerList.collector());
+    }
+
+    public SMatcher tryFind() {
         try {
             return find();
-        } catch (Exception e) {
+        } catch (Exception ex) {
             return null;
         }
     }
 
-    default SElement find(int index) {
-        return findAll().get(index);
-    }
-
-    default int count() {
+    public int count() {
         return findAll().size();
     }
 }
+

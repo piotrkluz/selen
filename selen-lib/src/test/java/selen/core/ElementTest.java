@@ -1,4 +1,4 @@
-package selen;
+package selen.core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
@@ -18,14 +18,7 @@ public class ElementTest {
 
     @BeforeAll
     public void init() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = DriverSource.getDriver();
-        content = new BrowserContent(driver);
-    }
-
-    @AfterAll
-    public void exit() {
-        DriverSource.close();
+        content = new BrowserContent(DriverSource.getDriver());
     }
 
     @Test

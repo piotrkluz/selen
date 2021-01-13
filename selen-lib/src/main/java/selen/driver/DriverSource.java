@@ -41,17 +41,17 @@ public class DriverSource {
         return newDriver;
     }
 
+    public static void close() {
+        if (driver != null) driver.close();
+        driver = null;
+    }
+
     private static Optional<RemoteWebDriver> tryReConnectToActiveBrowser() {
         try {
             return Optional.of(restoreDriverConnection(connectionStore.getConnectionString()));
         } catch (Exception e) {
             return Optional.empty();
         }
-    }
-
-    public static void close() {
-        if (driver != null) driver.close();
-        driver = null;
     }
 
     private static RemoteWebDriver restoreDriverConnection(String connectionString) throws WebDriverException, MalformedURLException {
@@ -69,7 +69,7 @@ public class DriverSource {
         CommandExecutor executor = new HttpCommandExecutor(command_executor) {
             @Override
             public Response execute(Command command) throws IOException {
-                Response response = null;
+                Response response;
                 if (command.getName().equals("newSession")) {
                     response = new Response();
                     response.setSessionId(sessionId.toString());
@@ -77,13 +77,11 @@ public class DriverSource {
                     response.setValue(Collections.<String, String>emptyMap());
 
                     try {
-                        Field commandCodec = null;
-                        commandCodec = this.getClass().getSuperclass().getDeclaredField("commandCodec");
+                        Field commandCodec = this.getClass().getSuperclass().getDeclaredField("commandCodec");
                         commandCodec.setAccessible(true);
                         commandCodec.set(this, new W3CHttpCommandCodec());
 
-                        Field responseCodec = null;
-                        responseCodec = this.getClass().getSuperclass().getDeclaredField("responseCodec");
+                        Field responseCodec = this.getClass().getSuperclass().getDeclaredField("responseCodec");
                         responseCodec.setAccessible(true);
                         responseCodec.set(this, new W3CHttpResponseCodec());
                     } catch (NoSuchFieldException | IllegalAccessException e) {

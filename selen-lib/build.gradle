@@ -7,18 +7,6 @@ plugins {
 group = 'selen-lib'
 version = '0.1.0'
 
-//publishing {
-//    publications {
-//        library(MavenPublication) {
-//            from components.java
-//        }
-//    }
-//    repositories {
-//        mavenLocal()
-////        maven { url = uri("${buildDir}/publishing-repository") }
-//    }
-//}
-
 repositories {
     jcenter()
 }
@@ -28,6 +16,7 @@ dependencies {
     implementation 'io.github.bonigarcia:webdrivermanager:4.1.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
     implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'commons-beanutils:commons-beanutils:1.9.4'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
