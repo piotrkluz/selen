@@ -33,7 +33,7 @@ public class ModuleTest {
 
     @Test
     public void useModule() {
-        MyForm myform = $("form").as(MyForm.class);
+        MyForm myform = $("div").as(MyForm.class);
         assertNotNull(myform);
         assertEquals(2, myform.getList().size());
     }

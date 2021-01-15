@@ -33,6 +33,10 @@ public class ByChain {
 
     }
 
+    public By getLast() {
+        return list.get(list.size() - 1);
+    }
+
     public List<By> getAll() {
         return this.list;
     }

@@ -1,6 +1,7 @@
 package selen.core;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import selen.exception.SelenCriticalError;
@@ -10,12 +11,18 @@ import selen.utils.PowerList;
 public class SMatcher implements SElement, IMatcher {
     private final ByChain chain;
     private WebElement webElement;
+    @Setter
+    private WebElement parentElement;
 
     public SMatcher(String cssOrXpath) {
         chain = new ByChain(cssOrXpath);
     }
     private SMatcher(ByChain chain) {
         this.chain = chain;
+    }
+    private SMatcher(ByChain chain, WebElement webElement) {
+        this.chain = chain;
+        this.webElement = webElement;
     }
 
     @Override
@@ -26,11 +33,17 @@ public class SMatcher implements SElement, IMatcher {
     }
 
     public SMatcher $(By by) {
-        return new SMatcher(this.chain.add(by));
+        return childMatcher(this.chain.add(by));
     }
 
     public SMatcher $(String cssOrXpath) {
-        return new SMatcher(this.chain.add(cssOrXpath));
+        return childMatcher(this.chain.add(cssOrXpath));
+    }
+
+    private SMatcher childMatcher(ByChain newChain) {
+        SMatcher child = new SMatcher(newChain);
+        if(this.webElement != null) child.setParentElement(this.webElement);
+        return child;
     }
 
     public SMatcher $parent() {
@@ -48,7 +61,7 @@ public class SMatcher implements SElement, IMatcher {
     }
 
     public SMatcher find() {
-        webElement = new FindExecutor(chain).find();
+        webElement = new FindExecutor(chain , parentElement).find();
         return this;
     }
 
@@ -57,7 +70,8 @@ public class SMatcher implements SElement, IMatcher {
     }
 
     public <T extends SMatcher> PowerList<T> findAll() {
-        return new FindExecutor(chain)
+
+        return new FindExecutor(chain, parentElement)
                 .findAll()
                 .stream()
                 .map(el -> (T)new SMatcher(chain, el))

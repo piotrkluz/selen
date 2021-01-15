@@ -12,25 +12,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FindExecutor {
     private final ByChain chain;
+    private final WebElement parentElement;
     private final WebDriver driver = DriverSource.getDriver();
 
     public PowerList<WebElement> findAll() {
-        PowerList<By> findList = PowerList.of(chain.getAll());
-        By lastBy = findList.last();
-        findList.remove(findList.size() - 1);
-        List<WebElement> foundList = findList.isEmpty()
+        PowerList<By> byList = PowerList.of(chain.getAll());
+        By lastBy = byList.last();
+        byList.remove(byList.size() - 1);
+
+        List<WebElement> foundList = parentElement != null
+                ? parentElement.findElements(lastBy)
+                : byList.isEmpty()
                 ? driver.findElements(lastBy)
-                : find(findList).findElements(lastBy);
+                : find(byList).findElements(lastBy);
+
         return PowerList.of(foundList);
     }
 
     public WebElement find() {
-        return find(chain.getAll());
+        return parentElement != null
+                ? findOne(chain.getLast(), parentElement)
+                : find(chain.getAll());
     }
 
-    private WebElement find(List<By> byChain) {
+    private WebElement find(List<By> bys) {
         WebElement el = null;
-        for (By by : byChain) {
+        for (By by : bys) {
             el = this.findOne(by, el);
         }
         return el;
