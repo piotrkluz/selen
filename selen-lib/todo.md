@@ -18,6 +18,8 @@ in this code command `$('ul').$('li').count()` should return 2, but actual is 4
 - [ ] $().element.highlight()
 
 
+
+- Module classes
 - [ ] Custom exceptions with proper messages
     - Keyboard exceptions
     - Find element exceptions
@@ -42,3 +44,7 @@ in this code command `$('ul').$('li').count()` should return 2, but actual is 4
   
 - [ ] Parallel run tests
   https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-parallel-execution
+
+- Browser managment
+    - auto close browser after tests
+    - let reuse browser between test runs development.reuseBrowserBetweenTests
