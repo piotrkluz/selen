@@ -3,8 +3,8 @@ package selen.core;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import selen.driver.DriverSource;
-import selen.pages.MyForm;
-import selen.pages.MyPage;
+import selen.util.pages.MyForm;
+import selen.util.pages.MyPage;
 import selen.util.BrowserContent;
 
 import static selen.SelenApi.$;

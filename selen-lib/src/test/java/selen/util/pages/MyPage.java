@@ -1,4 +1,4 @@
-package selen.pages;
+package selen.util.pages;
 
 import selen.core.SMatcher;
 import selen.core.SModule;

@@ -1,4 +1,4 @@
-package selen.pages;
+package selen.util.pages;
 
 import lombok.RequiredArgsConstructor;
 import selen.core.SElement;

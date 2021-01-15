@@ -13,6 +13,9 @@ in this code command `$('ul').$('li').count()` should return 2, but actual is 4
     - filter()
     - anyMatch()
     - allMatch()
+  
+- [ ] $().element.screenshot()
+- [ ] $().element.highlight()
 
 
 - [ ] Custom exceptions with proper messages
