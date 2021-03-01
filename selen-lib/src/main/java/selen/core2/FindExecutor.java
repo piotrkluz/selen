@@ -11,9 +11,9 @@ public class FindExecutor {
     private final WebDriver driver;
 
 
-    public WebElement find() {
-        return parentElement != null
-                ? findOne(chain.getLast(), parentElement)
-                : find(chain.getAll());
-    }
+//    public WebElement find() {
+//        return parentElement != null
+//                ? findOne(chain.getLast(), parentElement)
+//                : find(chain.getAll());
+//    }
 }
