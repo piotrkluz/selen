@@ -1,17 +1,12 @@
-package selen;
+package selen.core2;
 
 import org.openqa.selenium.WebDriver;
-import selen.core.SMatcher;
 import selen.driver.DriverSource;
 import selen.driver.SelenBrowser;
 
 public class SelenApi {
-    public static SMatcher $(String cssOrXpath) {
-        return new SMatcher(cssOrXpath);
-    }
-
-    public static void closeBrowser() {
-        DriverSource.close();
+    public static SelenElement $(String cssOrXpath) {
+        return new SelenElement(cssOrXpath);
     }
 
     public static WebDriver getDriver() {

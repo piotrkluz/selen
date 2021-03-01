@@ -2,21 +2,24 @@
 Lightweight selenium elements wrapper with powerful API
 
 # Attention
-Selen currently is in alpha version. Not ready for production. 
+Selen is currently in alpha version. Not ready for production. 
 
 # Quick introduction
 Selen extend and simplify Selenium API, and also handles Browser and driver running. 
 So only one line is needed to run the browser and search the elements: 
-```
+```java
 import static SelenApi.$;
-import static SelenApi.getDriver;
-// inside main function or elsewhere in the code
+import static SelenApi.getBrowser;
 
-WebDriver driver = getDriver()
-driver.get("https://www.wikipedia.org/")
+class Main {
+    public static void main(String[] args) {
+        Browser browser = getBrowser();
+        browser.get("https://www.wikipedia.org/");
+    
+        System.out.println($("html > body").outerHTML());
+    }
+}
 
-String bodyContent = $("html > body").outerHTML()
-System.out.println(bodyContent)
 ```
 Inside of `$("")` is selector.
 Can be use both CSS and XPATH. Selen automatically recognizes what type is it. 
