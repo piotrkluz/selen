@@ -9,7 +9,7 @@ import selen.driver.DriverSource;
 import selen.util.BrowserContent;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static selen.core.SelenApi.$;
+import static selen.SelenApi.$;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

@@ -9,7 +9,7 @@ import selen.util.BrowserContent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static selen.core.SelenApi.$;
+import static selen.SelenApi.$;
 
 public class ModuleTest {
 

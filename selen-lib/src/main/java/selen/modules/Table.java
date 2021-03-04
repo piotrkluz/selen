@@ -1,14 +1,12 @@
 package selen.modules;
 
-import selen.core.SElement;
-import selen.core.SMatcher;
-import selen.core.SModule;
+import selen.core.SelenElement;
 
 import java.util.List;
 
-public class Table extends SModule {
-    public Table(SMatcher matcher) {
-        super(matcher);
+public class Table extends SelenElement {
+    public Table(String s) {
+        super(s);
     }
 
     public TableModel getTable() {
@@ -21,12 +19,12 @@ public class Table extends SModule {
     public List<List<String>> getRows() {
         return $("tr")
                 .findAll().map(tr -> tr.$("td")
-                        .findAll().map(SElement::text)
+                        .findAll().map(SelenElement::getText)
                 );
     }
 
     public List<String> getColumns() {
         return $("th")
-                .findAll().map(SElement::text);
+                .findAll().map(SelenElement::getText);
     }
 }
