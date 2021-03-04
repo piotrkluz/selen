@@ -1,10 +1,8 @@
-package selen.core2.modules;
+package selen.core.modules;
 
-import selen.core2.SelenElement;
+import selen.core.SelenElement;
 
 import java.util.List;
-
-import static selen.core2.SelenApi.$;
 
 public class MyForm extends SelenElement {
     public final SelenElement firstNameInput = $("name:firstName");

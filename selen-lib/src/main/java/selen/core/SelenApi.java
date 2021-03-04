@@ -1,4 +1,4 @@
-package selen.core2;
+package selen.core;
 
 import org.openqa.selenium.WebDriver;
 import selen.driver.DriverSource;

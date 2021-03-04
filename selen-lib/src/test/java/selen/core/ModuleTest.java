@@ -1,15 +1,15 @@
-package selen.core2;
+package selen.core;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import selen.core2.modules.MyForm;
-import selen.core2.modules.MyPage;
+import selen.core.modules.MyForm;
+import selen.core.modules.MyPage;
 import selen.driver.DriverSource;
 import selen.util.BrowserContent;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static selen.core2.SelenApi.$;
+import static selen.core.SelenApi.$;
 
 public class ModuleTest {
 

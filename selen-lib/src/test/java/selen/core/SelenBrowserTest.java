@@ -1,4 +1,4 @@
-package selen.core2;
+package selen.core;
 
 import org.junit.jupiter.api.Test;
 import selen.SelenApi;

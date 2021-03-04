@@ -1,4 +1,4 @@
-package selen.core2;
+package selen.core;
 
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;

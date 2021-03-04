@@ -1,6 +1,6 @@
-package selen.core2.modules;
+package selen.core.modules;
 
-import selen.core2.SelenElement;
+import selen.core.SelenElement;
 
 public class MyPage extends SelenElement {
     public MyForm form1 = $("#form1").as(MyForm.class);

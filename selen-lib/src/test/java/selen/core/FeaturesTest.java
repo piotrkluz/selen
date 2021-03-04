@@ -1,4 +1,4 @@
-package selen.core2;
+package selen.core;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import selen.driver.DriverSource;
 import selen.util.BrowserContent;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static selen.core2.SelenApi.$;
+import static selen.core.SelenApi.$;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

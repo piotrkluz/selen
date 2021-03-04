@@ -1,11 +1,10 @@
-package selen.core2;
+package selen.core;
 
 import lombok.EqualsAndHashCode;
 import org.openqa.selenium.*;
-import selen.core.SMatcher;
-import selen.core2.extension.BaseExtension;
-import selen.core2.extension.JsExtension;
-import selen.core2.extension.WebElementProvider;
+import selen.core.extension.BaseExtension;
+import selen.core.extension.JsExtension;
+import selen.core.extension.WebElementProvider;
 import selen.driver.DriverSource;
 import selen.exception.SelenCriticalError;
 import selen.utils.PowerList;
@@ -105,17 +104,4 @@ public class SelenElement implements WebElement, WebElementProvider, JsExtension
                 ? getDriver().findElement(by)
                 : parent.findElement(by);
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof SelenElement)) return false;
-//        SelenElement that = (SelenElement) o;
-//        return chain.equals(that.chain) && Objects.equals(getWebElement(), that.getWebElement());
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(chain, getWebElement());
-//    }
 }

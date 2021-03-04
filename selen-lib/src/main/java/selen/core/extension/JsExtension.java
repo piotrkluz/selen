@@ -1,4 +1,4 @@
-package selen.core2.extension;
+package selen.core.extension;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.JavascriptExecutor;
