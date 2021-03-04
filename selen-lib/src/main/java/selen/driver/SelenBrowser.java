@@ -2,6 +2,7 @@ package selen.driver;
 
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -9,8 +10,13 @@ import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class SelenBrowser implements WebDriver {
+public class SelenBrowser implements WebDriver, BrowserJs {
     private final WebDriver driver;
+
+    @Override
+    public void executeJs(String js, Object... args) {
+        ((JavascriptExecutor)driver).executeScript(js, args);
+    }
 
     @Override
     public void get(String url) {

@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class KeyCombination {
-    private List<Keys> keysModifiers;
-    private String textKeys;
-    private WebDriver driver;
+    private final List<Keys> keysModifiers;
+    private final String textKeys;
+    private final WebDriver driver;
 
     /**
      * @param keyCombination examples:
@@ -62,7 +62,7 @@ public class KeyCombination {
     /**
      * Accepts formats:
      * arrowLeft, left, control, ...
-     * ARROW_LEFT, LEFT, CONTROL, ... - need to check / test
+     * ARROW_LEFT, LEFT, CONTROL, ...
      */
     private Keys convertToSeleniumKey(String key) {
         Keys found = findKey(key);

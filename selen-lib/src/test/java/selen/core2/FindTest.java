@@ -1,14 +1,17 @@
-package selen.core;
+package selen.core2;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import selen.driver.DriverSource;
 import selen.util.BrowserContent;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static selen.SelenApi.$;
+import static selen.core2.SelenApi.$;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class SMatcherTest {
+class FindTest {
     private static final String INPUT_VALUE = "some input";
     private static final String OPTION_VALUE = "some option";
     private static final String BASE_FORM = "<form id='inputForm'><input value='" + INPUT_VALUE + "'/></form>" +
@@ -87,19 +90,12 @@ public class SMatcherTest {
     }
 
     @Test
-    public void tryFind() {
-        content.setBody(BASE_FORM);
-
-        assertTrue($("//body").$("input").tryFind().isDisplayed());
-        assertNull($("//body").$("article").tryFind());
-    }
-
-    @Test
+    @Disabled("Not implemented yet")
     public void findNth() {
-        content.setBody(BASE_FORM);
-
-        assertEquals("thirdForm",
-                $("form").find(2).attribute("id"));
+//        content.setBody(BASE_FORM);
+//
+//        assertEquals("thirdForm",
+//                $("form").find(2).attribute("id"));
     }
 
     @Test
@@ -129,16 +125,8 @@ public class SMatcherTest {
     public void parentXpath() {
         content.setBody(BASE_FORM);
 
-
-        assertEquals("form", $("select").$("..").tagName());
-        assertEquals("form", $("select").$parent().tagName());
-    }
-
-    @Test
-    @Disabled("Not implemented yet")
-    public void selectorFromElementScope() {
-//        $("abc").find().$parent();
-//        $("abc").find().$("other");
+        assertEquals("form", $("select").$("..").getTagName());
+        assertEquals("form", $("select").$parent().getTagName());
     }
 
     @Test
@@ -159,21 +147,21 @@ public class SMatcherTest {
 
     @Test
     public void splitIntoModules() {
-        content.setBody("<ul><li></li></ul>\n" +
-                        "<ul><li></li></ul>\n" +
-                        "<ul><li></li></ul>");
+        content.setBody(
+                "<ul><li>first</li></ul>" +
+                "<ul><li>second</li></ul>" +
+                "<ul><li>third</li></ul>");
 
-        assertEquals(
-                1,
-                $("ul").$("li").count()
-        );
+        SelenElement li = $("ul").findAll().get(1).$("li");
+        assertEquals(1, li.count());
+        assertEquals("second", li.getText());
     }
 
-    private void shouldFind(SMatcher matcher, String text) {
-        assertEquals(text, matcher.value());
+    private void shouldFind(SelenElement matcher, String text) {
+        assertEquals(text, matcher.getValue());
     }
 
-    private void shouldNotFind(SMatcher matcher) {
-        assertNull(matcher.tryFind());
+    private void shouldNotFind(SelenElement matcher) {
+        assertFalse(matcher.isExist());
     }
 }

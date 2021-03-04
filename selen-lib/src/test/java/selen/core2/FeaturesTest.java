@@ -1,19 +1,19 @@
-package selen.core;
+package selen.core2;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.WebDriver;
-import selen.core.SElement;
 import selen.driver.DriverSource;
 import selen.util.BrowserContent;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static selen.SelenApi.$;
+import static selen.core2.SelenApi.$;
+
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ElementTest {
+class FeaturesTest {
     private BrowserContent content;
 
     @BeforeAll
@@ -25,7 +25,7 @@ public class ElementTest {
     public void text() {
         content.setBody("<p>Hello <span>World</span></p>");
 
-        assertEquals("Hello World", $("p").text());
+        assertEquals("Hello World", $("p").getText());
     }
 
 
@@ -51,16 +51,14 @@ public class ElementTest {
         assertFalse($("div").isDisplayed());
     }
 
-    // is exist policy
-
     @Test
     public void attribute() {
         content.setBody("<input type='text' value='' required>");
 
-        assertEquals("text", $("input").attribute("type"));
-        assertEquals("true", $("input").attribute("required"));
-        assertEquals("", $("input").attribute("value"));
-        assertNull($("input").attribute("notattribute"));
+        assertEquals("text", $("input").getAttribute("type"));
+        assertEquals("true", $("input").getAttribute("required"));
+        assertEquals("", $("input").getAttribute("value"));
+        assertNull($("input").getAttribute("notattribute"));
     }
 
     @Test
@@ -75,8 +73,8 @@ public class ElementTest {
     public void value() {
         content.setBody("<input type='text' value='abc' required><span>abc</span>");
 
-        assertEquals("abc", $("input").value());
-        assertNull($("span").value());
+        assertEquals("abc", $("input").getValue());
+        assertNull($("span").getValue());
     }
 
     @Test
@@ -85,18 +83,19 @@ public class ElementTest {
         final String LETTER = "A";
 
         // when db click - should mark entire text, and replace with letter
-        SElement input = $("input");
-        input.dbClick().sendKeys(LETTER);
+        SelenElement input = $("input");
+        input.dbClick();
+        input.sendKeys(LETTER);
 
         //then
-        assertEquals(LETTER, input.value());
+        assertEquals(LETTER, input.getValue());
     }
 
     @Test
     public void click() {
         content.setBody("<input value='first'/><input value='second'/>");
-        SElement input = $("input").find();
-        SElement secondInput = $("input").find(1);
+        SelenElement input = $("input").find();
+        SelenElement secondInput = $("input").findAll().get(1);
 
         //when
         secondInput.click();
@@ -114,8 +113,8 @@ public class ElementTest {
     @Test
     public void focus() {
         content.setBody("<input value='first'/><input value='second'/>");
-        SElement input = $("input").find();
-        SElement secondInput = $("input").find(1);
+        SelenElement input = $("input").find();
+        SelenElement secondInput = $("input").findAll().get(1);
 
         //when
         secondInput.focus();
@@ -134,11 +133,12 @@ public class ElementTest {
     public void dragAndDrop() {
 //        given
         content.setBody("<input/><input id='secondInput'/>");
-        SElement input1 = $("input").type("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        SElement input2 = $("#secondInput");
+        SelenElement input1 = $("input");
+        input1.type("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        SelenElement input2 = $("#secondInput");
 
 //        when
-        input1.dragAndDrop(input2);
+        input1.dragAndDrop(input2.getWebElement());
 
 //        then
         assertTrue(input1.selectionStart() > 1);
@@ -153,37 +153,37 @@ public class ElementTest {
     })
     public void type(String typeArgument, String expectedResult) {
         content.setBody("<input/>");
-        SElement input = $("input");
+        SelenElement input = $("input");
 
-        input.clear().type(typeArgument);
+        input.clear();
+        input.type(typeArgument);
 
-        assertEquals(expectedResult,  input.value());
+        assertEquals(expectedResult,  input.getValue());
     }
 
     @Test
     public void typeException() {
         content.setBody("<input/>");
         assertThrows(IllegalArgumentException.class, () ->
-            $("input").type("{backspace+ABC}")
+                $("input").type("{backspace+ABC}")
         );
     }
 
     @Test
     public void sendKeys() {
         content.setBody("<input/>");
-        SElement input = $("input").clear();
+        SelenElement input = $("input");
         input.sendKeys("123{backspace}{backspace}");
 
-        assertEquals("123{backspace}{backspace}", input.value());
+        assertEquals("123{backspace}{backspace}", input.getValue());
     }
 
     @Test
     public void equalsTest() {
         content.setBody("<form></form>");
-        WebDriver driver = $("form").getDriver();
-        SElement el1 = $("form").find();
-        SElement el2 = $("form").find();
+        SelenElement el1 = $("form").find();
+        SelenElement el2 = $("form").find();
 
-        assertTrue(el1.equals(el2));
+        assertEquals(el2, el1);
     }
 }

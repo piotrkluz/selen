@@ -1,4 +1,4 @@
-package selen.driver;
+package selen.core2;
 
 import org.junit.jupiter.api.Test;
 import selen.SelenApi;

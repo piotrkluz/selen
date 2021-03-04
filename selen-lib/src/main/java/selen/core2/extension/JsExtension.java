@@ -2,6 +2,7 @@ package selen.core2.extension;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import selen.keyboard.SelenKeyboard;
 
 public interface JsExtension extends WebElementProvider {
     default String innerHTML() {
@@ -21,9 +22,13 @@ public interface JsExtension extends WebElementProvider {
         return (Boolean) executeJs("return el === document.activeElement");
     }
 
-    default JsExtension focus() {
+    default void type(String textWithSpecialCharacters) {
+        focus();
+        new SelenKeyboard(getDriver()).type(textWithSpecialCharacters);
+    }
+
+    default void focus() {
         executeJs("el.focus()");
-        return this;
     }
 
     default JsExtension scrollIntoView() {
@@ -46,7 +51,7 @@ public interface JsExtension extends WebElementProvider {
      *
      * {@code
      *     myElement.executeJs("console.log(el.outerHTML)")
-     *     myElement.executeJs("console.log(arguments[0])", argumentComesFromJava)
+     *     myElement.executeJs("console.log(arguments[0])", arguments, comes, fromJava)
      * }
      */
     default Object executeJs(String jsCode, Object... arguments) {
