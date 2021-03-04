@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.openqa.selenium.By;
 import selen.driver.DriverSource;
 import selen.util.BrowserContent;
 
@@ -132,17 +133,24 @@ class FindTest {
     @Test
     @Disabled("Not implemented yet")
     public void textSelector() {
-//        $("select")
-//        $("abc").$contains(String text, boolean matchCase = false);
-//        $("abc").$withText(String text);
+//        $("abc").$contains(String text);
 //        $("abc").$startsWith(String text);
 //        $("abc").$endsWith(String text);
+//        $("abc").$containsMatchCase(String text);
+//        $("abc").$startsWithMatchCase(String text);
+//        $("abc").$endsWithMatchCase(String text);
+        $("p::contains(some text)").count();
+        $("p::startsWith(some text)").count();
+        $("p::endsWith(some text)").count();
     }
 
     @Test
     @Disabled("Not implemented")
     public void attributeSelector() {
 //        $("");
+//        $("id:someId");
+//        $("value:someId");
+//        $("class:someId");
     }
 
     @Test
