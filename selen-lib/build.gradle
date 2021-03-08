@@ -29,3 +29,13 @@ test {
     // Use junit platform for unit tests
     useJUnitPlatform()
 }
+
+// use task "./gradlew publishToMavenLocal" to be able to use this lib in other projects on local
+//this publishing section is also needed
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

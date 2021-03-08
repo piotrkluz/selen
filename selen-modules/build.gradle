@@ -4,17 +4,17 @@ plugins {
 //    id "io.freefair.lombok" version "5.1.0"
 }
 
-group = 'selen-example'
+group = 'selen-modules'
 version = '0.1.0'
 
 repositories {
-//    mavenLocal()
+    mavenLocal()
     jcenter()
 }
 
 dependencies {
     implementation project(':selen-lib')
-    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
+//    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
 }

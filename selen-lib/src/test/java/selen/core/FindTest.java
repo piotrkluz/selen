@@ -133,13 +133,25 @@ class FindTest {
     @Test
     @Disabled("Not implemented yet")
     public void textSelector() {
+
 //        $("abc").$contains(String text);
 //        $("abc").$startsWith(String text);
 //        $("abc").$endsWith(String text);
 //        $("abc").$containsMatchCase(String text);
 //        $("abc").$startsWithMatchCase(String text);
 //        $("abc").$endsWithMatchCase(String text);
-        $("p::contains(some text)").count();
+        $("[text='lol']");
+        $("[contains=\"lol\"]");
+        $("[matches=]");
+        $("[startsWith=]");
+        $("[endsWith=]");
+        $("[text=][]");
+        $("[text=][]");
+        $("[text=][]");
+        $("[text=][]");
+        $("[text=][]");
+        $("[text=][]");
+        $("[text=][]");
         $("p::startsWith(some text)").count();
         $("p::endsWith(some text)").count();
     }

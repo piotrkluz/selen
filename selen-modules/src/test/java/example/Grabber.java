@@ -1,4 +1,4 @@
-package bankier;
+package example;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;

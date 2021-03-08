@@ -17,7 +17,6 @@ public interface JsExtension extends WebElementProvider {
     default long selectionEnd() {
         return (long) executeJs("return el.selectionEnd");
     }
-
     default boolean hasFocus() {
         return (Boolean) executeJs("return el === document.activeElement");
     }
