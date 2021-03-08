@@ -1,4 +1,4 @@
-package selen.keyboard;
+package selen.exception;
 
 public class SelenException extends RuntimeException {
     public SelenException(String message) {

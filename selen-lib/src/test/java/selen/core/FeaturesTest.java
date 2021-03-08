@@ -28,7 +28,6 @@ class FeaturesTest {
         assertEquals("Hello World", $("p").getText());
     }
 
-
     @Test
     public void innerHTMLTest() {
         content.setBody("<p>Hello <span>World</span></p>");

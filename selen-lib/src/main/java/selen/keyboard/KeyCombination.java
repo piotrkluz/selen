@@ -3,6 +3,7 @@ package selen.keyboard;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import selen.exception.SelenException;
 
 import java.util.Arrays;
 import java.util.List;
