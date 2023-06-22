@@ -1,3 +1,8 @@
+# Attention
+This project is no longer maintained. 
+Successor with similar API is here: https://github.com/comfast-dev/comfast-ui 
+
+
 # selen
 Lightweight selenium elements wrapper with powerful API
 
